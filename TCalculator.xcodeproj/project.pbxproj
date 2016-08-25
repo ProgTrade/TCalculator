@@ -11,6 +11,14 @@
 		B655135D1D6DDA7600F8C63E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B655135C1D6DDA7600F8C63E /* Assets.xcassets */; };
 		B65513601D6DDA7600F8C63E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B655135E1D6DDA7600F8C63E /* MainMenu.xib */; };
 		B655136B1D6DDA7600F8C63E /* TCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655136A1D6DDA7600F8C63E /* TCalculatorTests.swift */; };
+		B65513761D6DDC6700F8C63E /* TCMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65513751D6DDC6700F8C63E /* TCMainWindow.xib */; };
+		B65513781D6DDCEA00F8C63E /* TCParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65513771D6DDCEA00F8C63E /* TCParser.swift */; };
+		B655137A1D6DDDB300F8C63E /* TCToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65513791D6DDDB300F8C63E /* TCToken.swift */; };
+		B655137C1D6DDDC500F8C63E /* TCTokenType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655137B1D6DDDC500F8C63E /* TCTokenType.swift */; };
+		B655137E1D6DE52300F8C63E /* TCGenericToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655137D1D6DE52300F8C63E /* TCGenericToken.swift */; };
+		B65513801D6DE8C700F8C63E /* InvalidTokenError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655137F1D6DE8C700F8C63E /* InvalidTokenError.swift */; };
+		B65513821D6DEBBD00F8C63E /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65513811D6DEBBD00F8C63E /* Stack.swift */; };
+		B65513861D6DED2D00F8C63E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65513851D6DED2D00F8C63E /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +40,14 @@
 		B65513661D6DDA7600F8C63E /* TCalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TCalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B655136A1D6DDA7600F8C63E /* TCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCalculatorTests.swift; sourceTree = "<group>"; };
 		B655136C1D6DDA7600F8C63E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B65513751D6DDC6700F8C63E /* TCMainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TCMainWindow.xib; sourceTree = "<group>"; };
+		B65513771D6DDCEA00F8C63E /* TCParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCParser.swift; sourceTree = "<group>"; };
+		B65513791D6DDDB300F8C63E /* TCToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCToken.swift; sourceTree = "<group>"; };
+		B655137B1D6DDDC500F8C63E /* TCTokenType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCTokenType.swift; sourceTree = "<group>"; };
+		B655137D1D6DE52300F8C63E /* TCGenericToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCGenericToken.swift; sourceTree = "<group>"; };
+		B655137F1D6DE8C700F8C63E /* InvalidTokenError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvalidTokenError.swift; sourceTree = "<group>"; };
+		B65513811D6DEBBD00F8C63E /* Stack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		B65513851D6DED2D00F8C63E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +91,16 @@
 			children = (
 				B655135A1D6DDA7600F8C63E /* AppDelegate.swift */,
 				B655135C1D6DDA7600F8C63E /* Assets.xcassets */,
-				B655135E1D6DDA7600F8C63E /* MainMenu.xib */,
+				B65513851D6DED2D00F8C63E /* Extensions.swift */,
 				B65513611D6DDA7600F8C63E /* Info.plist */,
+				B655137F1D6DE8C700F8C63E /* InvalidTokenError.swift */,
+				B655135E1D6DDA7600F8C63E /* MainMenu.xib */,
+				B65513811D6DEBBD00F8C63E /* Stack.swift */,
+				B655137D1D6DE52300F8C63E /* TCGenericToken.swift */,
+				B65513751D6DDC6700F8C63E /* TCMainWindow.xib */,
+				B65513771D6DDCEA00F8C63E /* TCParser.swift */,
+				B65513791D6DDDB300F8C63E /* TCToken.swift */,
+				B655137B1D6DDDC500F8C63E /* TCTokenType.swift */,
 			);
 			path = TCalculator;
 			sourceTree = "<group>";
@@ -172,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B655135D1D6DDA7600F8C63E /* Assets.xcassets in Resources */,
+				B65513761D6DDC6700F8C63E /* TCMainWindow.xib in Resources */,
 				B65513601D6DDA7600F8C63E /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +215,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65513801D6DE8C700F8C63E /* InvalidTokenError.swift in Sources */,
+				B655137E1D6DE52300F8C63E /* TCGenericToken.swift in Sources */,
+				B65513821D6DEBBD00F8C63E /* Stack.swift in Sources */,
+				B65513861D6DED2D00F8C63E /* Extensions.swift in Sources */,
+				B655137A1D6DDDB300F8C63E /* TCToken.swift in Sources */,
+				B65513781D6DDCEA00F8C63E /* TCParser.swift in Sources */,
+				B655137C1D6DDDC500F8C63E /* TCTokenType.swift in Sources */,
 				B655135B1D6DDA7600F8C63E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -313,7 +345,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = TCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.trade.TCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = de.tradeprogramming.TCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -325,7 +357,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = TCalculator/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = de.trade.TCalculator;
+				PRODUCT_BUNDLE_IDENTIFIER = de.tradeprogramming.TCalculator;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
