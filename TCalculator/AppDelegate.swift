@@ -13,6 +13,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
+        
+        TCTokenActions.initConstantActions()
+        TCTokenActions.initFunctionActions()
+        TCTokenActions.initOperatorActions()
     }
     
     func applicationWillTerminate(aNotification: NSNotification) {

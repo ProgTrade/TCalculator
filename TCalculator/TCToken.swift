@@ -6,18 +6,16 @@
 //  Copyright © 2016 Dominic Beger. All rights reserved.
 //
 
+#if os(OSX) || os(iOS)
+    import Darwin
+#elseif os(Linux)
+    import Glibc
+#endif
 import Foundation
 
 class TCToken {
     
-    // Value type is currently a placeholder.
-    // TODO: Add a delegate for editing the stack as value of the dictionaries
-    static let constantActions: [String: AnyObject] = [String: AnyObject]()
-    static let functionActions: [String: AnyObject] = [String: AnyObject]()
-    static let operatorActions: [String: AnyObject] = [String: AnyObject]()
-    
     var type: TCTokenType!
-    
     init(type: TCTokenType) {
         self.type = type
     }
@@ -48,23 +46,23 @@ class TCToken {
             
             let currentString: String = input[index...endIndex]
             // Last two conditions to parse e.g. "* sin(5)" correctly: As soon as the current token has finished, we should stop reading.
-            if (functionActions.containsKey(currentString) || operatorActions.containsKey(currentString) || constantActions.containsKey(currentString) || currentString.isBracket()) {
+            if (TCTokenActions.functionActions.containsKey(currentString) || TCTokenActions.operatorActions.containsKey(currentString) || TCTokenActions.constantActions.containsKey(currentString) || currentString.isBracket()) {
                 // This indicates that it has been found in the dictionary, so that is already it.
                 break
             }
         }
         
         let stringToken: String = input[index...endIndex]
-        if (functionActions.containsKey(stringToken)) {
+        if (TCTokenActions.functionActions.containsKey(stringToken)) {
             newType = TCTokenType.Function
         }
-        else if (operatorActions.containsKey(stringToken)) {
+        else if (TCTokenActions.operatorActions.containsKey(stringToken)) {
             newType = TCTokenType.Operator
         }
         else if (stringToken.isBracket()) {
             newType = TCTokenType.Bracket
         }
-        else if (constantActions.containsKey(stringToken)) {
+        else if (TCTokenActions.constantActions.containsKey(stringToken)) {
             newType = TCTokenType.Constant
         }
         else {
@@ -73,6 +71,42 @@ class TCToken {
         
         index = endIndex
         return try! TCGenericToken<String>(value: stringToken, type: newType)
+    }
+    
+    func evaluate(inout tokenStack: Stack<Double>) throws {
+        
+        // Unwrapping it because Swift does not automatically do that for an implicitly unwrapped optional when using switch-case
+        switch (self.type!) {
+            
+        case TCTokenType.Number:
+            // The tokens coming from our tokenizer should be fine, but we need to check them, though.
+            if let token = self as? TCGenericToken<Double> {
+                tokenStack.push(token.value)
+            }
+        case TCTokenType.Function:
+            if let token = self as? TCGenericToken<String> {
+                if let action: (inout Stack<Double>) -> Void = TCTokenActions.functionActions[token.value] {
+                    action(&tokenStack)
+                }
+            }
+        case TCTokenType.Operator:
+            if let token = self as? TCGenericToken<String> {
+                if let action: (inout Stack<Double>) -> Void = TCTokenActions.operatorActions[token.value] {
+                    action(&tokenStack)
+                }
+            }
+        case TCTokenType.Constant:
+            if let token = self as? TCGenericToken<String> {
+                if let action: (inout Stack<Double>) -> Void = TCTokenActions.constantActions[token.value] {
+                    action(&tokenStack)
+                }
+            }
+            
+        default:
+            // wat
+            print("Type is: \(self.type) and it could not be evaluated.")
+        }
+        
     }
     
     static func createInfixTokens(term: String) throws -> [TCToken] {
