@@ -22,7 +22,7 @@ class TCToken {
         self.type = type
     }
     
-    static func ReadNumberToken(input: String, inout index: Int) throws -> TCGenericToken<Double> {
+    static func readNumberToken(input: String, inout index: Int) throws -> TCGenericToken<Double> {
         var endIndex = index
         while (endIndex < input.length && (input[endIndex].isDigit() || input[endIndex] == ".")) {
             endIndex += 1
@@ -39,7 +39,7 @@ class TCToken {
         }
     }
     
-    static func ReadStringToken(input: String, inout index: Int) throws -> TCGenericToken<String> {
+    static func readStringToken(input: String, inout index: Int) throws -> TCGenericToken<String> {
         
         var newType: TCTokenType!
         var endIndex = index
@@ -104,10 +104,10 @@ class TCToken {
                     }
                 }
                 
-                infixTokens.append(try ReadStringToken(localTerm, index: &i)) // TODO: Check error handling
+                infixTokens.append(try readStringToken(localTerm, index: &i)) // TODO: Check error handling
             }
             else if (current.isDigit()) { // Number
-                infixTokens.append(try ReadNumberToken(localTerm, index: &i)) // TODO: Check error handling
+                infixTokens.append(try readNumberToken(localTerm, index: &i)) // TODO: Check error handling
             }
             else {
                 throw InvalidTokenError.TokenTypeNotFound(readToken: current)
