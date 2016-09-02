@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		B63F5C171D79C8C900A3E213 /* MathHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F5C161D79C8C900A3E213 /* MathHelper.swift */; };
 		B63F5C191D79CA1C00A3E213 /* TCTokenActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F5C181D79CA1C00A3E213 /* TCTokenActions.swift */; };
+		B63F5C1B1D79D34E00A3E213 /* TCMainWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F5C1A1D79D34E00A3E213 /* TCMainWindow.swift */; };
+		B63F5C1D1D79D37100A3E213 /* TCMainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F5C1C1D79D37100A3E213 /* TCMainWindowController.swift */; };
+		B63F5C1F1D7A096B00A3E213 /* TCParserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63F5C1E1D7A096B00A3E213 /* TCParserError.swift */; };
+		B63F5C201D7A143E00A3E213 /* TCToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65513791D6DDDB300F8C63E /* TCToken.swift */; };
 		B655135B1D6DDA7600F8C63E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655135A1D6DDA7600F8C63E /* AppDelegate.swift */; };
 		B655135D1D6DDA7600F8C63E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B655135C1D6DDA7600F8C63E /* Assets.xcassets */; };
 		B65513601D6DDA7600F8C63E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B655135E1D6DDA7600F8C63E /* MainMenu.xib */; };
@@ -36,6 +40,9 @@
 /* Begin PBXFileReference section */
 		B63F5C161D79C8C900A3E213 /* MathHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathHelper.swift; sourceTree = "<group>"; };
 		B63F5C181D79CA1C00A3E213 /* TCTokenActions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCTokenActions.swift; sourceTree = "<group>"; };
+		B63F5C1A1D79D34E00A3E213 /* TCMainWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCMainWindow.swift; sourceTree = "<group>"; };
+		B63F5C1C1D79D37100A3E213 /* TCMainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCMainWindowController.swift; sourceTree = "<group>"; };
+		B63F5C1E1D7A096B00A3E213 /* TCParserError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TCParserError.swift; sourceTree = "<group>"; };
 		B65513571D6DDA7600F8C63E /* TCalculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TCalculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B655135A1D6DDA7600F8C63E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B655135C1D6DDA7600F8C63E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,9 +111,12 @@
 				B655137D1D6DE52300F8C63E /* TCGenericToken.swift */,
 				B65513751D6DDC6700F8C63E /* TCMainWindow.xib */,
 				B65513771D6DDCEA00F8C63E /* TCParser.swift */,
+				B63F5C1E1D7A096B00A3E213 /* TCParserError.swift */,
 				B65513791D6DDDB300F8C63E /* TCToken.swift */,
 				B63F5C181D79CA1C00A3E213 /* TCTokenActions.swift */,
 				B655137B1D6DDDC500F8C63E /* TCTokenType.swift */,
+				B63F5C1A1D79D34E00A3E213 /* TCMainWindow.swift */,
+				B63F5C1C1D79D37100A3E213 /* TCMainWindowController.swift */,
 			);
 			path = TCalculator;
 			sourceTree = "<group>";
@@ -223,11 +233,14 @@
 			files = (
 				B65513801D6DE8C700F8C63E /* InvalidTokenError.swift in Sources */,
 				B655137E1D6DE52300F8C63E /* TCGenericToken.swift in Sources */,
+				B63F5C1F1D7A096B00A3E213 /* TCParserError.swift in Sources */,
 				B65513821D6DEBBD00F8C63E /* Stack.swift in Sources */,
 				B63F5C171D79C8C900A3E213 /* MathHelper.swift in Sources */,
 				B65513861D6DED2D00F8C63E /* Extensions.swift in Sources */,
 				B655137A1D6DDDB300F8C63E /* TCToken.swift in Sources */,
 				B63F5C191D79CA1C00A3E213 /* TCTokenActions.swift in Sources */,
+				B63F5C1D1D79D37100A3E213 /* TCMainWindowController.swift in Sources */,
+				B63F5C1B1D79D34E00A3E213 /* TCMainWindow.swift in Sources */,
 				B65513781D6DDCEA00F8C63E /* TCParser.swift in Sources */,
 				B655137C1D6DDDC500F8C63E /* TCTokenType.swift in Sources */,
 				B655135B1D6DDA7600F8C63E /* AppDelegate.swift in Sources */,
@@ -238,6 +251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B63F5C201D7A143E00A3E213 /* TCToken.swift in Sources */,
 				B655136B1D6DDA7600F8C63E /* TCalculatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
