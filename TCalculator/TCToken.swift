@@ -26,7 +26,7 @@ class TCToken {
             endIndex += 1
         }
         
-        let numberToken: String = input[index...endIndex]
+        let numberToken: String = input[index..<endIndex]
         let numberValue = Double(numberToken)
         if let number = numberValue {
             index = endIndex
@@ -44,7 +44,7 @@ class TCToken {
         while (endIndex < input.length && (input[endIndex].isLetter() || input[endIndex].isMathematicOperator() || input[endIndex].isBracket())) {
             endIndex += 1
             
-            let currentString: String = input[index...endIndex]
+            let currentString: String = input[index..<endIndex]
             // Last two conditions to parse e.g. "* sin(5)" correctly: As soon as the current token has finished, we should stop reading.
             if (TCTokenActions.functionActions.containsKey(currentString) || TCTokenActions.operatorActions.containsKey(currentString) || TCTokenActions.constantActions.containsKey(currentString) || currentString.isBracket()) {
                 // This indicates that it has been found in the dictionary, so that is already it.
@@ -52,7 +52,7 @@ class TCToken {
             }
         }
         
-        let stringToken: String = input[index...endIndex]
+        let stringToken: String = input[index..<endIndex]
         if (TCTokenActions.functionActions.containsKey(stringToken)) {
             newType = TCTokenType.Function
         }
@@ -73,7 +73,7 @@ class TCToken {
         return try! TCGenericToken<String>(value: stringToken, type: newType)
     }
     
-    func evaluate(inout tokenStack: Stack<Double>) throws {
+    func evaluate(inout tokenStack: Stack<Double>) {
         
         // Unwrapping it because Swift does not automatically do that for an implicitly unwrapped optional when using switch-case
         switch (self.type!) {
@@ -149,5 +149,72 @@ class TCToken {
         }
         
         return infixTokens
+    }
+    
+    static func shuntingYard(infixTokens: [TCToken]) throws -> [TCToken] {
+        
+        var operatorStack = Stack<TCGenericToken<String>>()
+        var output = [TCToken]()
+        
+        var lastToken: TCToken!
+        for token in infixTokens {
+            if (lastToken != nil) {
+                
+                // A constant value or number must be followed by an operator or closing bracket...
+                if ((lastToken.type == TCTokenType.Constant || lastToken.type == TCTokenType.Number) &&
+                    (token.type != TCTokenType.Operator && !token.isClosingBracket())) {
+                    throw TCParserError.NumberNotFollowedByOperatorOrClosingBracket
+                }
+                
+                // A closing bracket must be followed by an operator or another closing bracket...
+                if (lastToken.isClosingBracket() && (token.type != TCTokenType.Operator && !token.isClosingBracket())) {
+                    throw TCParserError.ClosingBracketNotFollowedByOperatorOrClosingBracket
+                }
+            }
+            
+            lastToken = token
+            switch (token.type!) {
+                
+            case TCTokenType.Number:
+                output.append(token as! TCGenericToken<Double>)
+            case TCTokenType.Function:
+                operatorStack.push(token as! TCGenericToken<String>)
+            case TCTokenType.Operator:
+                let currentOperatorToken = token as! TCGenericToken<String>
+                while (operatorStack.count > 0 && operatorStack.top!.type == TCTokenType.Operator &&
+                    (!currentOperatorToken.isRightAssociative &&
+                        (currentOperatorToken.priority == operatorStack.top!.priority) || currentOperatorToken.priority < operatorStack.top!.priority)) {
+                            output.append(operatorStack.pop()!)
+                }
+                operatorStack.push(currentOperatorToken)
+            case TCTokenType.Bracket:
+                let bracketToken = token as! TCGenericToken<String>
+                switch (bracketToken.value)
+                {
+                case "(":
+                    operatorStack.push(bracketToken)
+                case ")":
+                    while (operatorStack.top!.value != "(") {
+                        output.append(operatorStack.pop()!)
+                    }
+                    operatorStack.pop()
+                    
+                    if (operatorStack.count > 0 && (operatorStack.top!.type == TCTokenType.Function)) {
+                        output.append(operatorStack.pop()!)
+                    }
+                default:
+                    // wat
+                    print("The value is not a valid bracket.")
+                }
+            case TCTokenType.Constant:
+                output.append(token as! TCGenericToken<String>)
+            }
+        }
+        
+        while (operatorStack.count > 0) { // Flush the remaining stuff
+            output.append(operatorStack.pop()!);
+        }
+        
+        return output;
     }
 }

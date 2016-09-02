@@ -75,3 +75,13 @@ extension Dictionary {
         return self[key] != nil
     }
 }
+
+extension TCToken {
+    func isOpeningBracket() -> Bool {
+        return self.type == TCTokenType.Bracket && (self as! TCGenericToken<String>).value == "(";
+    }
+    
+    func isClosingBracket() -> Bool {
+        return self.type == TCTokenType.Bracket && (self as! TCGenericToken<String>).value == ")";
+    }
+}
